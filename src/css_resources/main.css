@@ -179,11 +179,15 @@ table.source th {
 }
 
 table.source tr.covered {
-	background-color: #fdd;
+	background-color: #a7f6a7;
 }
 
 table.source tr.uncovered {
-	background-color: #eeeeee;
+	background-color: #Ff4040;
+}
+
+table.source tr.halfcovered {
+	background-color: #FFb673;
 }
 
 table.source tr.kwnone {

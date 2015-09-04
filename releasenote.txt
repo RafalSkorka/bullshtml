@@ -1,4 +1,8 @@
 = BullsHTML Release Note =
+    * 1.1.0(2015.09.04)
+      - Converted from Google Code to GitHub
+      - Added support for condition coverage (apart from decision coverage).
+      
 	* 1.0.4(2010.03.17)
 	  - Support bullseye 8.0.X covxml change.
 	  - Fix a bug which generate incorrect source code link. (Link is broken in firefox)

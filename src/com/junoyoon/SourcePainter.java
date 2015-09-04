@@ -1,5 +1,6 @@
 /**
  * Copyright (C) 2009 JunHo Yoon
+ * Copyright (C) 2015 Rafal Skorka
  *
  * bullshtml is free software; you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published
@@ -63,7 +64,7 @@ public class SourcePainter {
 	}
 
 	/**
-	 * Custom Renderer which enables line speration.
+	 * Custom Renderer which enables line separation.
 	 */
 	class CustomCppXhtmlRenderer extends CppXhtmlRenderer {
 		String token;
@@ -107,7 +108,7 @@ public class SourcePainter {
 						w.append("<tr class=\"").append(decisionPoint.decisionCoverType.getLineCss()).append("\">").append("\n");
 						w.append("<td class=\"line\">").append(lineCount);
 						if (decisionPoint.sequence) {
-							w.append("-").append(count++);
+							w.append(count++);
 						}
 						if (decisionPoint.decisionType == DecisionType.FUNCTION) {
 							w.append("<a name='").append(lineCount).append("'/>");
@@ -115,14 +116,20 @@ public class SourcePainter {
 						w.append("</td>").append("\n");
 						if (decisionPoint.sequence) {
 							if (peekingIterator.hasNext()) {
-								nextColumn = peekingIterator.peek().column;
+								nextColumn = peekingIterator.peek().column > curColumn ? peekingIterator.peek().column : 1000;
 							} else {
-								nextColumn = -1;
+								nextColumn = 1000;
 							}
 							remainedLine = getColumnString(line, curColumn, nextColumn);
 							curColumn = nextColumn;
 						}
-						w.append("<td class=\"line\">").append(decisionPoint.decisionCoverType.getHtml()).append("</td>").append("\n");
+						String coverTypeHtml = decisionPoint.decisionCoverType.getHtml();
+						if (decisionPoint.decisionType == DecisionType.CONDITION)
+						{
+							coverTypeHtml = coverTypeHtml.replace('T', 't');
+							coverTypeHtml = coverTypeHtml.replace('F', 'f');
+						}
+						w.append("<td class=\"line\">").append(coverTypeHtml).append("</td>").append("\n");
 						w.append("<td class=\"code\">");
 						renderALine(remainedLine.toString(), highlighter, w);
 						w.append("</td>").append("\n");

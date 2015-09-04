@@ -1,5 +1,6 @@
 /**
  * Copyright (C) 2009 JunHo Yoon
+ * Copyright (C) 2015 Rafal Skorka
  *
  * bullshtml is free software; you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published
@@ -55,7 +56,7 @@ public class SrcDecisionPoint {
 			point.line = Integer.parseInt(element.getAttributeValue("line"));
 			String columnValue = element.getAttributeValue("column");
 			point.column = columnValue != null ? Integer.parseInt(columnValue) : 0;
-			point.sequence = element.getAttributeValue("seq") != null;
+//			point.sequence = element.getAttributeValue("seq") != null;
 		}
 		return point;
 	}

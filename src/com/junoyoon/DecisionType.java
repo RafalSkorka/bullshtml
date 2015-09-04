@@ -1,5 +1,6 @@
 /**
  * Copyright (C) 2009 JunHo Yoon
+ * Copyright (C) 2015 Rafal Skorka
  *
  * bullshtml is free software; you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published
@@ -16,7 +17,12 @@
 package com.junoyoon;
 
 public enum DecisionType {
-	TRY("try", 0), CATCH("catch", 1), CASE("switch-label", 1), DECISION("decision", 1), FUNCTION("function", 0);
+	TRY("try", 0), 
+	CATCH("catch", 1), 
+	CASE("switch-label", 1), 
+	DECISION("decision", 1), 
+	CONDITION("condition", 1), 
+	FUNCTION("function", 0);
 
 	public final String name;
 	public final int complexity;

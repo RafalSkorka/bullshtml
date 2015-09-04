@@ -1,5 +1,6 @@
 /**
  * Copyright (C) 2009 JunHo Yoon
+ * Copyright (C) 2015 Rafal Skorka
  *
  * bullshtml is free software; you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published
@@ -29,8 +30,8 @@ public class SrcFunction {
 	public SrcFunction init(Element element) {
 		String name = element.getAttributeValue("name");
 		this.name = name.contains(")") ? name : name + "()";
-		this.branchCount = Integer.parseInt(element.getAttributeValue("d_total"));
-		this.coveredBranchCount = Integer.parseInt(element.getAttributeValue("d_cov"));
+		this.branchCount = Integer.parseInt(element.getAttributeValue("cd_total"));
+		this.coveredBranchCount = Integer.parseInt(element.getAttributeValue("cd_cov"));
 		this.covered = "1".equals(element.getAttributeValue("fn_cov"));
 		boolean isFirst = true;
 		for (Object elementObject : element.getChildren()) {
@@ -45,6 +46,16 @@ public class SrcFunction {
 			}
 			SrcDecisionPoint decisionPoint = SrcDecisionPoint.createDecisionPoint(eachProbe);
 			if (decisionPoint != null) {
+				for (SrcDecisionPoint look : this.decisionPoints)
+				{
+					if (look.line == decisionPoint.line)
+					{
+						decisionPoint.sequence = true;
+						look.sequence = true;
+						break;
+					}
+				}
+				
 				this.decisionPoints.add(decisionPoint);
 			}
 		}
