@@ -9,3 +9,6 @@ Windows: "ant packagewindow"
 
 Linux: "ant packagelinux"
 
+## Example output
+
+<img src="bullshtml_output.png" />
