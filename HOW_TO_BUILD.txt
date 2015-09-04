@@ -1,4 +1,0 @@
-
-To make the win32 exe, run pacakgewindow ant task using "ant packagewindow"
-
-To make the linux, just run following packagelinux ant task using "ant packagelinux". 
