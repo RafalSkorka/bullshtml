@@ -4,6 +4,8 @@ This project has been forked from google code as the original author seems to no
 This project has been enhanced to support newer version of Bullseye and properly show branch coverage.
 
 ## Build instructions
+
 Windows: "ant packagewindow"
+
 Linux: "ant packagelinux"
 
