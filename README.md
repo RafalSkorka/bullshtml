@@ -9,6 +9,12 @@ Windows: "ant packagewindow"
 
 Linux: "ant packagelinux"
 
+## Usage
+
+java -jar /path1/bullshtml.jar -c /path2/covxml /path3/bullshtml 
+
+This will use covxml in a given path2 and store html files and coverage xml in /path3/bullshtml
+
 ## Example output
 
 <img src="bullshtml_output.png" />
