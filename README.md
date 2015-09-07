@@ -5,9 +5,18 @@ This project has been enhanced to support newer version of Bullseye and properly
 
 ## Build instructions
 
-Windows: "ant packagewindow"
+Windows:
 
-Linux: "ant packagelinux"
+    ant packagewindow
+Linux:
+
+    ant packagelinux
+
+## Usage
+
+    java -jar /path1/bullshtml.jar -c /path2/covxml /path3/bullshtml 
+
+This will use covxml in a given path2 and store html files and coverage xml in /path3/bullshtml
 
 ## Example output
 
