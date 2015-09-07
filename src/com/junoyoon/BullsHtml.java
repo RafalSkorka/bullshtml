@@ -1,5 +1,6 @@
 /**
  * Copyright (C) 2009 JunHo Yoon
+ * Copyright (C) 2015 Rafal Skorka
  *
  * bullshtml is free software; you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published
@@ -49,10 +50,11 @@ public class BullsHtml {
 
 	private static final Options OPTS = new Options();
 	static {
-		BullsHtml.OPTS.addOption("e", "encoding", true, "source code encoding.");
+		BullsHtml.OPTS.addOption("e", "encoding", true, "source code encoding");
 		BullsHtml.OPTS.addOption("h", "help", false, "print help");
-		BullsHtml.OPTS.addOption("f", "help", true, "assign test.cov file");
-		BullsHtml.OPTS.addOption("v", "verbose", false, "vebose output mode");
+		BullsHtml.OPTS.addOption("f", "file", true, "assign test.cov file");
+		BullsHtml.OPTS.addOption("v", "verbose", false, "verbose output mode");
+		BullsHtml.OPTS.addOption("c", "covxml", true, "full path to covxml");
 	}
 
 	/** System default encoding */
@@ -67,19 +69,20 @@ public class BullsHtml {
 	private static boolean verbose;
 
 	/**
-	 * Contrcut Src and Dir List. After calling the method, the static variable
+	 * Construct Src and Dir List. After calling the method, the static variable
 	 * {@link BullsHtml.srcMap}, {@link BullsHtml.baseList},
 	 * {@link BullsHtml.srcFileList} are constructed.
 	 * 
 	 * @param covfile
+	 * @param covxml
 	 */
 
 	@SuppressWarnings("serial")
-	public void process(final String covfile) {
+	public void process(final String covfile, final String covxml) {
 		try {
 			String output = BullsUtil.getCmdOutput(new ArrayList<String>() {
 				{
-					add("covxml");
+					add(covxml);
 					add("--no-banner");
 					if (covfile != null) {
 						add("-f");
@@ -89,13 +92,13 @@ public class BullsHtml {
 			});
 			if (output == null) {
 				BullsHtml
-					.printErrorAndExit("While running covxml, A error occurs.\nPlease check bullseyecoverage path is and COVFILE environment variable");
+					.printErrorAndExit("While running covxml, an error occured.\nPlease check bullseyecoverage is accessiblie from current PATH\nand COVFILE environment variable is set.");
 			}
 			StringReader reader = new StringReader(output);
 			processInternal(reader);
 		} catch (Exception e) {
 			BullsHtml.printErrorAndExit(
-				"While running covxml, A error occurs.\nPlease check bullseyecoverage path is and COVFILE environment variable", e);
+					"While running covxml, an error occured.\nPlease check bullseyecoverage is accessiblie from current PATH\nand COVFILE environment variable is set.", e);
 		}
 	}
 
@@ -405,6 +408,13 @@ public class BullsHtml {
 				printErrorAndExit(covfile + " does not exists");
 			}
 		}
+		String covxml = "covxml";
+		if (line.hasOption("c")) {
+			covxml = line.getOptionValue("c");
+			if (!new File(covxml).exists()) {
+				printErrorAndExit(covxml + " does not exists");
+			}
+		}
 
 		String outputPath = ".";
 
@@ -423,7 +433,7 @@ public class BullsHtml {
 			printErrorAndExit(outputPath + " is not writable.");
 		}
 		BullsHtml bullshtml = new BullsHtml();
-		bullshtml.process(covfile);
+		bullshtml.process(covfile, covxml);
 		if (BullsHtml.baseList.isEmpty()) {
 			printErrorAndExit("No coverage was recorded in cov file. please check if src is compiled with coverage on.");
 		}
