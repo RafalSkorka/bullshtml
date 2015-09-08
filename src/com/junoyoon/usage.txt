@@ -1,7 +1,10 @@
-BullsHtml ${VERSION} : BulleyeCoverage Html Report Tool
+BullsHtml ${VERSION} : BullseyeCoverage Html Report Tool
 
 Usage: bullshtml [options] html_report_folder
   -h               this help
-  -f covfilepath   assign test.cov file. 
+  -f covfilepath   assign test.cov file 
   -v               verbose output mode
-  -e encoding      source code encoding 
+  -e encoding      source code encoding
+  -c covxmlpath    full path to covxml
+  -s strip         strip file path
+  

@@ -55,6 +55,7 @@ public class BullsHtml {
 		BullsHtml.OPTS.addOption("f", "file", true, "assign test.cov file");
 		BullsHtml.OPTS.addOption("v", "verbose", false, "verbose output mode");
 		BullsHtml.OPTS.addOption("c", "covxml", true, "full path to covxml");
+		BullsHtml.OPTS.addOption("s", "strip", true, "strip path from report");
 	}
 
 	/** System default encoding */
@@ -67,7 +68,8 @@ public class BullsHtml {
 	public static ArrayList<SrcFile> srcFileList = new ArrayList<SrcFile>();
 	public static Encoding sourceEncoding = Encoding.UTF_8;
 	private static boolean verbose;
-
+	public static String stripPath = "";
+	
 	/**
 	 * Construct Src and Dir List. After calling the method, the static variable
 	 * {@link BullsHtml.srcMap}, {@link BullsHtml.baseList},
@@ -408,6 +410,10 @@ public class BullsHtml {
 				printErrorAndExit(covfile + " does not exists");
 			}
 		}
+		if (line.hasOption("s")) {
+			stripPath = line.getOptionValue("s");
+		}
+
 		String covxml = "covxml";
 		if (line.hasOption("c")) {
 			covxml = line.getOptionValue("c");

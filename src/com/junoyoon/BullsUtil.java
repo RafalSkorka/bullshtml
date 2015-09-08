@@ -1,5 +1,6 @@
 /**
  * Copyright (C) 2009 JunHo Yoon
+ * Copyright (C) 2015 Rafal Skorka
  *
  * bullshtml is free software; you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published
@@ -62,7 +63,7 @@ public class BullsUtil {
 	 * @return normalized path
 	 */
 	public static String normalizePath(String path) {
-		return path.replace(" ", "_").replace(":", "_").replace("\\", "_").replace("/", "_").replace(".", "_");
+		return path.replace(BullsHtml.stripPath, "").replace(" ", "_").replace(":", "_").replace("\\", "_").replace("/", "_").replace(".", "_").replace(BullsHtml.stripPath, "");
 	}
 
 	/**
