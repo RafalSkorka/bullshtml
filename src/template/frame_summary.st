@@ -1,5 +1,6 @@
 $template/header()$
 <h5>Coverage Summary</h5>
+<h6>Generated on $creationDate$</h6>
 <div class="separator">&nbsp;</div> 
 <table class="report" id="total"> 
 <thead>

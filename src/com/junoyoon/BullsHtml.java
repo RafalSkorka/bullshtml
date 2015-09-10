@@ -20,9 +20,12 @@ import java.io.File;
 import java.io.IOException;
 import java.io.Reader;
 import java.io.StringReader;
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Comparator;
+import java.util.Date;
 import java.util.HashMap;
 import java.util.HashSet;
 import java.util.List;
@@ -293,6 +296,10 @@ public class BullsHtml {
 	public void generateMainHtml(File path) {
 		StringTemplate template = BullsUtil.getTemplate("frame_summary");
 		File nPath = new File(path, "frame_summary.html");
+		
+		DateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+		Date date = new Date();
+		template.setAttribute("creationDate", dateFormat.format(date));
 
 		template.setAttribute("baseDir", BullsHtml.baseList);
 		List<SrcFile> localSrcFileList = new ArrayList<SrcFile>(BullsHtml.srcFileList);
@@ -308,24 +315,40 @@ public class BullsHtml {
 
 		template.setAttribute("srcFileList", localSrcFileList.subList(0, Math.min(10, BullsHtml.srcFileList.size())));
 
-		List<SrcDir> dirFileList = getSrcDirList();
+		List<SrcDir> dirFileList = getSrcDirListByRisk();
 
-		template.setAttribute("dirList", dirFileList.subList(0, Math.min(10, dirFileList.size())));
+		template.setAttribute("dirList", dirFileList);
 		BullsUtil.writeToFile(nPath, template.toString());
 	}
-
-	public List<SrcDir> getSrcDirList() {
+	
+	private ArrayList<SrcDir> getSrcDirListUnsorted()
+	{
 		ArrayList<SrcDir> list = new ArrayList<SrcDir>();
 		for (SrcDir srcDir : BullsHtml.srcMap.values()) {
 			if (srcDir.isWorthToPrint()) {
 				list.add(srcDir);
 			}
 		}
+		return list;
+	}
+	
+	public List<SrcDir> getSrcDirListByName()
+	{
+		ArrayList<SrcDir> list = getSrcDirListUnsorted();
 		Collections.sort(list, new Comparator<SrcDir>() {
 			public int compare(SrcDir o1, SrcDir o2) {
-				// System.out.println(o2.name + o2.risk + o1.name + o1.risk +
-				// (o1.risk -o2.risk ));
 				return o1.path.compareTo(o2.path);
+			}
+		});
+
+		return list;
+	}
+
+	public List<SrcDir> getSrcDirListByRisk() {
+		ArrayList<SrcDir> list = getSrcDirListUnsorted();
+		Collections.sort(list, new Comparator<SrcDir>() {
+			public int compare(SrcDir o1, SrcDir o2) {
+				return (o2.functionCount - o2.coveredFunctionCount) - (o1.functionCount - o1.coveredFunctionCount);
 			}
 		});
 
@@ -341,7 +364,7 @@ public class BullsHtml {
 	public void generateDirListHtml(File path) {
 		StringTemplate template = BullsUtil.getTemplate("frame_dirs");
 
-		template.setAttribute("srcDirList", getSrcDirList());
+		template.setAttribute("srcDirList", getSrcDirListByName());
 		File nPath = new File(path, "frame_dirs.html");
 		BullsUtil.writeToFile(nPath, template.toString());
 	}
