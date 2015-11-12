@@ -64,8 +64,8 @@ public class SrcFile extends Src implements Comparable<SrcFile> {
 		this.setNormalizedPath(BullsUtil.normalizePath(this.path.getParentFile()) + "/" + BullsUtil.normalizePath(this.path.getName()));
 		this.coveredFunctionCount = Integer.parseInt(element.getAttributeValue("fn_cov"));
 		this.functionCount = Integer.parseInt(element.getAttributeValue("fn_total"));
-		this.coveredBranchCount = Integer.parseInt(element.getAttributeValue("d_cov"));
-		this.branchCount = Integer.parseInt(element.getAttributeValue("d_total"));
+		this.coveredBranchCount = Integer.parseInt(element.getAttributeValue("cd_cov"));
+		this.branchCount = Integer.parseInt(element.getAttributeValue("cd_total"));
 		this.timestamp = Long.parseLong(element.getAttributeValue("mtime"));
 		this.risk = this.branchCount - this.coveredBranchCount;
 		registerParent(dir);
