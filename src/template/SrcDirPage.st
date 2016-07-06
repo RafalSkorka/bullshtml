@@ -1,5 +1,5 @@
 $template/header()$
-<h5>Coverage Report - $srcDir.path$ 
+<h5>Coverage Report - $srcDir.strippedPath$ 
 $if(srcDir.worthyParent)$
 <a href="$srcDir.worthyParent.normalizedPath$.html"><img src='images/upper.png' border="0"/></a>
 $endif$

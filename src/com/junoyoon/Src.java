@@ -27,6 +27,7 @@ import com.uwyn.jhighlight.tools.StringUtils;
 public abstract class Src {
 	public File path;
 	private String normalizedPath;
+	public String strippedPath;
 	public int functionCount;
 	public int coveredFunctionCount;
 	public int branchCount;

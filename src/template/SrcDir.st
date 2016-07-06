@@ -1,5 +1,5 @@
 	<tr>
-		<td><a href='$it.normalizedPath$.html'>$it.path$</a></td>
+		<td><a href='$it.normalizedPath$.html'>$it.strippedPath$</a></td>
 		<td class='value'>$it.fileCount$</td>
 		<td><table cellpadding='0px' cellspacing='0px' class='percentgraph'>
 				<tr class='percentgraph'>

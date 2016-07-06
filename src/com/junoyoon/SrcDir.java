@@ -33,6 +33,7 @@ public class SrcDir extends Src implements Comparable<SrcDir> {
 	public SrcDir init(File path) {
 		this.path = path;
 		this.setNormalizedPath(BullsUtil.normalizePath(path));
+		this.strippedPath = BullsUtil.stripPath(path);
 		return this;
 	}
 

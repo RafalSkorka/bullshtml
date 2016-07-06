@@ -62,6 +62,7 @@ public class SrcFile extends Src implements Comparable<SrcFile> {
 			e.printStackTrace();
 		}
 		this.setNormalizedPath(BullsUtil.normalizePath(this.path.getParentFile()) + "/" + BullsUtil.normalizePath(this.path.getName()));
+		this.strippedPath = BullsUtil.stripPath(this.path);
 		this.coveredFunctionCount = Integer.parseInt(element.getAttributeValue("fn_cov"));
 		this.functionCount = Integer.parseInt(element.getAttributeValue("fn_total"));
 		this.coveredBranchCount = Integer.parseInt(element.getAttributeValue("cd_cov"));

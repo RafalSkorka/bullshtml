@@ -8,7 +8,7 @@ $template/header()$
 $srcDirList: { it |
 	$if(it.worthToPrint)$
 	<tr>
-		<td nowrap='nowrap'><a target='summary' href='$it.normalizedPath$.html'>$it.path$</a> 
+		<td nowrap='nowrap'><a target='summary' href='$it.normalizedPath$.html'>$it.strippedPath$</a> 
 			<span class="smallcovf">$it.functionCoverageString$%</span> <span class="smallcovb">$it.branchCoverageString$%</span>
 		</td>
 	</tr>

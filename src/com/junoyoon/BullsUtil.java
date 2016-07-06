@@ -65,6 +65,19 @@ public class BullsUtil {
 	public static String normalizePath(String path) {
 		return path.replace(BullsHtml.stripPath, "").replace(" ", "_").replace(":", "_").replace("\\", "_").replace("/", "_").replace(".", "_").replace(BullsHtml.stripPath, "");
 	}
+	
+	public static String stripPath(File path) {
+		try {
+			return stripPath(path.getCanonicalPath());
+		} catch (IOException e) {
+			return stripPath(path.getAbsolutePath());
+		}
+	}
+	
+	public static String stripPath(String path) 
+	{
+	    return path.replace(BullsHtml.stripPath, "");
+	}
 
 	/**
 	 * Write file

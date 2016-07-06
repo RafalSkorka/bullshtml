@@ -387,7 +387,6 @@ public class BullsHtml {
 	 * 
 	 * @param outputPath
 	 * @param dir
-	 * @param baseNormalizedName
 	 */
 	public void generateChildHtml(File outputPath, SrcDir dir) {
 		for (Src src : dir.child) {

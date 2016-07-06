@@ -1,4 +1,7 @@
 = BullsHTML Release Note =
+    * 1.2.0(2016.07.06)
+      - Strip also displayed paths with -s option
+
     * 1.1.0(2015.09.04)
       - Converted from Google Code to GitHub
       - Added support for condition coverage (apart from decision coverage).
