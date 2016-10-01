@@ -21,6 +21,9 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.io.Reader;
 import java.io.StringReader;
+import java.util.Collection;
+import java.util.Collections;
+import java.util.Comparator;
 import java.util.List;
 
 import org.apache.commons.io.IOUtils;
@@ -189,6 +192,15 @@ public class SourcePainter {
 	 **/
 	public String paint(File file, List<SrcDecisionPoint> decisionPoints, Encoding encoding) throws IOException {
 		InputStream inputStream = new FileInputStream(file);
+
+		/* need to sort List "by line" so that renderer finds them in the right spot */
+		Collections.sort(decisionPoints, new Comparator<SrcDecisionPoint>() {
+			@Override
+			public int compare(SrcDecisionPoint o1, SrcDecisionPoint o2) {
+				return Integer.valueOf(o1.line).compareTo(Integer.valueOf(o2.line));
+			}
+		});
+
 		PeekingIterator<SrcDecisionPoint> peekingIterator = BullsUtil.peekingIterator(decisionPoints.iterator());
 		StringBuffer sb = this.renderer.highlight(IOUtils.readLines(inputStream, encoding.getEncodingKey()), peekingIterator);
 		IOUtils.closeQuietly(inputStream);
