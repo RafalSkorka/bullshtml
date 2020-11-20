@@ -15,7 +15,7 @@
 <mainClassName>com.simontuffs.onejar.Boot</mainClassName>
 <maximumMemoryHeap>-1</maximumMemoryHeap>
 <maximumVersion></maximumVersion>
-<minimumVersion>1.5</minimumVersion>
+<minimumVersion>1.8</minimumVersion>
 <skeletonName>Console Wrapper</skeletonName>
 <skeletonProperties>
 <key>Message</key>

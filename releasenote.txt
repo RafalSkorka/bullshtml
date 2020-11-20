@@ -1,4 +1,7 @@
 = BullsHTML Release Note =
+    * 1.2.1(2020.11.20)
+      - Generate Java 8 bytecode for Java 15 compatibility
+
     * 1.2.0(2016.07.06)
       - Strip also displayed paths with -s option
 
